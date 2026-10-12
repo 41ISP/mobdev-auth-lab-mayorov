@@ -1,24 +1,15 @@
-import { Outlet } from "react-router-dom"
-import NavBar from "../components/NavBar"
+import useUserStore from '../store/useUserStore'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-
-const Layout = () => {
-    return (
-        <div className="container">
-
-            <main>
-                <div id="outlet">
-                    <NavBar/>
-                    <Outlet />
-                </div>
-            </main>
-
-            <footer>
-                <p>&copy; 2025 Маркетплейс. Все права защищены.</p>
-            </footer>
-
-        </div>
-    )
+const Logout = () => {
+    const navigate = useNavigate()
+    const clearSession = useUserStore((state) => state.clearSession)
+    useEffect(() => {
+        clearSession()
+        navigate('/')
+    }, [clearSession, navigate])
+    return <></>
 }
 
-export default Layout
+export default Logout
